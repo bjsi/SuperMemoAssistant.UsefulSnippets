@@ -31,82 +31,54 @@
 
 namespace SuperMemoAssistant.Plugins.UsefulSnippets
 {
-    using System.Diagnostics.CodeAnalysis;
-    using SuperMemoAssistant.Services.Sentry;
+  using System.Diagnostics.CodeAnalysis;
+  using SuperMemoAssistant.Plugins.UsefulSnippets.Config;
+  using SuperMemoAssistant.Services.Sentry;
 
-    // ReSharper disable once UnusedMember.Global
-    // ReSharper disable once ClassNeverInstantiated.Global
-    [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
-    public class UsefulSnippetsPlugin : SentrySMAPluginBase<UsefulSnippetsPlugin>
+  // ReSharper disable once UnusedMember.Global
+  // ReSharper disable once ClassNeverInstantiated.Global
+  [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
+  public class UsefulSnippetsPlugin : SentrySMAPluginBase<UsefulSnippetsPlugin>
+  {
+    #region Constructors
+
+    /// <inheritdoc />
+    public UsefulSnippetsPlugin() : base("Enter your Sentry.io api key (strongly recommended)") { }
+
+    #endregion
+
+
+
+
+    #region Properties Impl - Public
+
+    /// <inheritdoc />
+    public override string Name => "UsefulSnippets";
+
+    /// <inheritdoc />
+    public override bool HasSettings => false;
+    public CfgTemplate Config;
+
+    #endregion
+
+
+
+
+    #region Methods Impl
+
+    /// <inheritdoc />
+    protected override void PluginInit()
     {
-        #region Constructors
-
-        /// <inheritdoc />
-        public UsefulSnippetsPlugin() : base("Enter your Sentry.io api key (strongly recommended)") { }
-
-        #endregion
-
-
-
-
-        #region Properties Impl - Public
-
-        /// <inheritdoc />
-        public override string Name => "UsefulSnippets";
-
-        /// <inheritdoc />
-        public override bool HasSettings => false;
-
-        #endregion
-
-
-
-
-        #region Methods Impl
-
-        /// <inheritdoc />
-        protected override void PluginInit()
-        {
-            // Insert code that needs to be run when the plugin is initialized.
-            // Typical initialization code consists of:
-            // - Registering keyboard hotkeys
-            // - Registering to be notified about events (e.g. OnElementChanged)
-            // - Initializing your own services
-            // - Publishing services for other plugins
-
-            // If you have questions or issues, you can:
-            // - Check our wiki for developer guides https://sma.supermemo.wiki/
-            // - Browse through our plugins' source code https://github.com/supermemo/
-            // - Ask for help on our Discord server https://discord.gg/vUQhqCT
-
-            // Uncomment to register an event handler which will be notified when the displayed element changes
-            // Svc.SM.UI.ElementWdw.OnElementChanged += new ActionProxy<SMDisplayedElementChangedEventArgs>(OnElementChanged);
-        }
-
-        // Set HasSettings to true, and uncomment this method to add your custom logic for settings
-        // /// <inheritdoc />
-        // public override void ShowSettings()
-        // {
-        // }
-
-        #endregion
-
-
-
-
-        #region Methods
-
-        // Uncomment to register an event handler for element changed events
-        // [LogToErrorOnException]
-        // public void OnElementChanged(SMDisplayedElementChangedEventArgs e)
-        // {
-        //   try
-        //   {
-        //     Insert your logic here
-        //   }
-        //   catch (RemotingException) { }
-        // }
-
-        #endregion
     }
+
+
+    #endregion
+
+
+
+
+    #region Methods
+
+    #endregion
+  }
 }
