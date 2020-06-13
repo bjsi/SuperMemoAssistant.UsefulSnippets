@@ -19,7 +19,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     {
 
       var ctrlGroup = Svc.SM.UI.ElementWdw.ControlGroup;
-      var htmlCtrl = ctrlGroup?.FocusedControl.AsHtml();
+      var htmlCtrl = ctrlGroup?.FocusedControl?.AsHtml();
       var htmlDoc = htmlCtrl?.GetDocument();
       var sel = htmlDoc?.selection;
 
@@ -38,7 +38,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     {
 
       var ctrlGroup = Svc.SM.UI.ElementWdw.ControlGroup;
-      var htmlCtrl = ctrlGroup?.GetFirstHtmlControl().AsHtml();
+      var htmlCtrl = ctrlGroup?.GetFirstHtmlControl()?.AsHtml();
       var htmlDoc = htmlCtrl?.GetDocument();
       return htmlDoc;
 
@@ -52,7 +52,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     {
       var ctrlGroup = Svc.SM.UI.ElementWdw.ControlGroup;
       var htmlCtrl = ctrlGroup?.GetFirstHtmlControl()?.AsHtml();
-      return html?.Text;
+      return htmlCtrl?.Text;
     }
 
     /// <summary>
@@ -63,7 +63,5 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     {
       return Svc.SM.UI.ElementWdw.CurrentElementId;
     }
-
-
   }
 }
