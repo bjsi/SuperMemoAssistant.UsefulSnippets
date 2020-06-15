@@ -18,5 +18,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets.Config
     {
       return Svc<UsefulSnippetsPlugin>.Plugin.Config;
     }
+
+
   }
 }

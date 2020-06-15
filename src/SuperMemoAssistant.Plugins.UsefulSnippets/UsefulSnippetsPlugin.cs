@@ -33,6 +33,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 {
   using System.Diagnostics.CodeAnalysis;
   using SuperMemoAssistant.Plugins.UsefulSnippets.Config;
+  using SuperMemoAssistant.Services;
   using SuperMemoAssistant.Services.Sentry;
 
   // ReSharper disable once UnusedMember.Global
@@ -70,6 +71,12 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     protected override void PluginInit()
     {
     }
+
+    private void LoadConfig()
+    {
+      Config = Svc.Configuration.Load<CfgTemplate>() ?? new CfgTemplate();
+    }
+
 
 
     #endregion
