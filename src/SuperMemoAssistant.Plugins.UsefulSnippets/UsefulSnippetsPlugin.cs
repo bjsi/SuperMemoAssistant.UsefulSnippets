@@ -32,9 +32,12 @@
 namespace SuperMemoAssistant.Plugins.UsefulSnippets
 {
   using System.Diagnostics.CodeAnalysis;
+  using System.Windows.Input;
   using SuperMemoAssistant.Plugins.UsefulSnippets.Config;
   using SuperMemoAssistant.Services;
+  using SuperMemoAssistant.Services.IO.Keyboard;
   using SuperMemoAssistant.Services.Sentry;
+  using SuperMemoAssistant.Sys.IO.Devices;
 
   // ReSharper disable once UnusedMember.Global
   // ReSharper disable once ClassNeverInstantiated.Global
@@ -69,6 +72,18 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 
     /// <inheritdoc />
     protected override void PluginInit()
+    {
+      Svc.HotKeyManager.RegisterGlobal(
+        "",
+        "",
+        HotKeyScopes.SMBrowser,
+        new HotKey(Key.M, KeyModifiers.CtrlAltShift),
+        CallThisFunction
+      );
+    }
+
+    // Called when the hotkey is pressed
+    private void CallThisFunction()
     {
     }
 
