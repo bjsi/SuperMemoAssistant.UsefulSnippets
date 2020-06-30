@@ -27,11 +27,26 @@
 #endregion
 
 
+using Xunit;
+
 
 
 namespace SuperMemoAssistant.Plugins.UsefulSnippets.Tests
 {
-    class Class1
+  public class HtmlIndexTests
+  {
+
+    private const string html = "<html><body><h1>Title</h1><h3>Subtitle</h3></body></html>";
+    
+    [Theory]
+    [InlineData(2, 18)]
+    [InlineData(7, 32)]
+    public void ConvertTextIdToHtmlIdxReturnsHtmlIdx(int textIdx, int expected)
     {
+
+      int actual = CurrentElement.ConvertTextIdxToHtmlIdx(html, textIdx);
+      Assert.Equal(expected, textIdx);
+
     }
+  }
 }

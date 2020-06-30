@@ -1,4 +1,5 @@
-﻿using mshtml;
+﻿using HtmlAgilityPack;
+using mshtml;
 using SuperMemoAssistant.Extensions;
 using SuperMemoAssistant.Services;
 using System;
@@ -31,6 +32,75 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     }
 
     /// <summary>
+    /// Get the end index of the selection object as text.
+    /// </summary>
+    /// <param name="selObj"></param>
+    /// <returns>index or -1</returns>
+    public static int GetSelectionTextEndIdx(IHTMLTxtRange selObj)
+    {
+
+      int MaxTextLength = 2000000000;
+      int result = -1;
+      if (selObj != null)
+      {
+        var duplicate = selObj.duplicate();
+        result = Math.Abs(duplicate.moveEnd("character", -MaxTextLength));
+      }
+      return result;
+
+    }
+
+    /// <summary>
+    /// Get the start index of the selection object as text.
+    /// </summary>
+    /// <param name="selObj"></param>
+    /// <returns>index or -1</returns>
+    public static int GetSelectionTextStartIdx(IHTMLTxtRange selObj)
+    {
+
+      int MaxTextLength = 2000000000;
+      int result = -1;
+      if (selObj != null)
+      {
+        var duplicate = selObj.duplicate();
+        result = Math.Abs(duplicate.moveStart("character", -MaxTextLength));
+      }
+      return result;
+
+    }
+
+    /// <summary>
+    /// Convert a text index to the equivalent position in the html string.
+    /// </summary>
+    /// <param name="html"></param>
+    /// <param name="textIdx"></param>
+    /// <returns>index or -1</returns>
+    public static int ConvertTextIdxToHtmlIdx(string html, int textIdx)
+    {
+
+      var doc = new HtmlDocument();
+      doc.LoadHtml(html);
+      var nodes = doc.DocumentNode.Descendants();
+
+      int startIdx = 0;
+      int endIdx = 0;
+
+      int htmlIdx = -1;
+
+      foreach (var node in nodes)
+      {
+        endIdx += node.InnerText?.Length ?? 0;
+        if (startIdx <= textIdx && textIdx <= endIdx)
+        {
+          htmlIdx = node.InnerStartIndex + (textIdx - startIdx);
+          break;
+        }
+      }
+
+      return htmlIdx;
+    }
+
+    /// <summary>
     /// Get the IHTMLDocument2 object representing the first html control of the current element.
     /// </summary>
     /// <returns>IHTMLDocument2 object or null</returns>
@@ -39,8 +109,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 
       var ctrlGroup = Svc.SM.UI.ElementWdw.ControlGroup;
       var htmlCtrl = ctrlGroup?.GetFirstHtmlControl()?.AsHtml();
-      var htmlDoc = htmlCtrl?.GetDocument();
-      return htmlDoc;
+      return htmlCtrl?.GetDocument();
 
     }
 

@@ -52,8 +52,6 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     #endregion
 
 
-
-
     #region Properties Impl - Public
 
     /// <inheritdoc />
@@ -64,8 +62,6 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     public CfgTemplate Config;
 
     #endregion
-
-
 
 
     #region Methods Impl
@@ -92,11 +88,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
       Config = Svc.Configuration.Load<CfgTemplate>() ?? new CfgTemplate();
     }
 
-
-
     #endregion
-
-
 
 
     #region Methods
