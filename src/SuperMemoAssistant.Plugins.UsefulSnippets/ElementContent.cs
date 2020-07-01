@@ -78,15 +78,25 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     public static int ConvertTextIdxToHtmlIdx(string html, int textIdx)
     {
 
+      if (string.IsNullOrEmpty(html))
+        return -1;
+
+      if (textIdx < 0)
+        return -1;
+
       var doc = new HtmlDocument();
       doc.LoadHtml(html);
-      var nodes = doc.DocumentNode.Descendants().Where(x => x.Name == "#text");
+
+      var nodes = doc.DocumentNode
+                    ?.Descendants()
+                    ?.Where(x => x.Name == "#text");
+      if (nodes == null || !nodes.Any())
+        return -1;
 
       // Return -1 if not found
       int htmlIdx = -1;
 
       int startIdx = 0;
-
       // Starts on -1 because we are adding 1-indexed length to 0-indexed index
       int endIdx = -1;
 
