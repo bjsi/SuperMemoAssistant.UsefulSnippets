@@ -33,19 +33,20 @@ using Xunit;
 
 namespace SuperMemoAssistant.Plugins.UsefulSnippets.Tests
 {
+
   public class HtmlIndexTests
   {
 
-    private const string html = "<html><body><h1>Title</h1><h3>Subtitle</h3></body></html>";
-    
     [Theory]
     [InlineData(2, 18)]
     [InlineData(7, 32)]
-    public void ConvertTextIdToHtmlIdxReturnsHtmlIdx(int textIdx, int expected)
+    [InlineData(21, 57)]
+    public void ConvertTextIdxToHtmlIdxReturnsHtmlIdx(int textIdx, int expected)
     {
 
-      int actual = CurrentElement.ConvertTextIdxToHtmlIdx(html, textIdx);
-      Assert.Equal(expected, textIdx);
+      const string input = "<html><body><h1>Title</h1><h3>Subtitle</h3><p>This is <b>COOL</b></p></body></html>";
+      int actual = CurrentElement.ConvertTextIdxToHtmlIdx(input, textIdx);
+      Assert.Equal(expected, actual);
 
     }
   }

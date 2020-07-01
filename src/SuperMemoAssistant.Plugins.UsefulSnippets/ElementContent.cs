@@ -80,21 +80,28 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 
       var doc = new HtmlDocument();
       doc.LoadHtml(html);
-      var nodes = doc.DocumentNode.Descendants();
+      var nodes = doc.DocumentNode.Descendants().Where(x => x.Name == "#text");
+
+      // Return -1 if not found
+      int htmlIdx = -1;
 
       int startIdx = 0;
-      int endIdx = 0;
 
-      int htmlIdx = -1;
+      // Starts on -1 because we are adding 1-indexed length to 0-indexed index
+      int endIdx = -1;
 
       foreach (var node in nodes)
       {
-        endIdx += node.InnerText?.Length ?? 0;
+
+        endIdx += node.InnerText.Length;
+
         if (startIdx <= textIdx && textIdx <= endIdx)
         {
           htmlIdx = node.InnerStartIndex + (textIdx - startIdx);
           break;
         }
+
+        startIdx = endIdx + 1;
       }
 
       return htmlIdx;
