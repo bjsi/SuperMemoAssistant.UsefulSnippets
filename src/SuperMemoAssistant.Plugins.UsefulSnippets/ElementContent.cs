@@ -32,7 +32,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     }
 
     /// <summary>
-    /// Get the end index of the selection object as text.
+    /// Get the end index of the selection object as an inner text index.
     /// </summary>
     /// <param name="selObj"></param>
     /// <returns>index or -1</returns>
@@ -51,7 +51,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     }
 
     /// <summary>
-    /// Get the start index of the selection object as text.
+    /// Get the start index of the selection object as an inner text index.
     /// </summary>
     /// <param name="selObj"></param>
     /// <returns>index or -1</returns>
