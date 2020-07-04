@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SuperMemoAssistant.Plugins.UsefulSnippets
 {
@@ -89,7 +90,8 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 
       var nodes = doc.DocumentNode
                     ?.Descendants()
-                    ?.Where(x => x.Name == "#text");
+                    ?.Where(x => x.Name == "#text" || x.Name == "br");
+
       if (nodes == null || !nodes.Any())
         return -1;
 
@@ -102,8 +104,16 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
 
       foreach (var node in nodes)
       {
+        if (node.Name == "br")
+        {
+          startIdx++;
+          endIdx++;
+          continue;
+        }
 
-        endIdx += node.InnerText.Length;
+        var decoded = HttpUtility.HtmlDecode(node.InnerText);
+        var len = decoded.Replace("\r\n", " ").Length;
+        endIdx += len;
 
         if (startIdx <= textIdx && textIdx <= endIdx)
         {

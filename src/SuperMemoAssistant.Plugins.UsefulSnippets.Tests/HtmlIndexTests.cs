@@ -41,10 +41,12 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets.Tests
     [InlineData(2, 18)]
     [InlineData(7, 32)]
     [InlineData(21, 57)]
+    [InlineData(24, 60)]
+    [InlineData(25, 73)]
     public void ConvertTextIdxToHtmlIdxReturnsHtmlIdx(int textIdx, int expected)
     {
 
-      const string input = "<html><body><h1>Title</h1><h3>Subtitle</h3><p>This is <b>COOL</b></p></body></html>";
+      const string input = "<html><body><h1>Title</h1><h3>Subtitle</h3><p>This is <b>COOL</b><BR><BR>hi</p></body></html>";
       int actual = CurrentElement.ConvertTextIdxToHtmlIdx(input, textIdx);
       Assert.Equal(expected, actual);
 
