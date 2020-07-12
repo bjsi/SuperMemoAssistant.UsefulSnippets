@@ -11,26 +11,43 @@ using System.Threading.Tasks;
 
 namespace SuperMemoAssistant.Plugins.UsefulSnippets.Config
 {
+
+
   [Form(Mode = DefaultFields.None)]
   [Title("Dictionary Settings",
-   IsVisible = "{Env DialogHostContext}")]
+         IsVisible = "{Env DialogHostContext}")]
   [DialogAction("cancel",
-          "Cancel",
-          IsCancel = true)]
+        "Cancel",
+        IsCancel = true)]
   [DialogAction("save",
-          "Save",
-          IsDefault = true,
-          Validates = true)]
-  public class CfgTemplate : CfgBase<CfgTemplate>, INotifyPropertyChangedEx
+        "Save",
+        IsDefault = true,
+        Validates = true)]
+  public class Cfg : CfgBase<Cfg>, INotifyPropertyChangedEx
   {
 
-    /// <summary>
-    /// Look at Forge.Forms documentation / other plugins to understand the field syntax
-    /// </summary>
-    /// Eg:
+    [Title("Plugin Name")]
 
-    [Field(Name = "Username")]
-    public string Username { get; set; }
+    [Heading("By Jamesb | Experimental Learning")]
+
+    [Heading("Features:")]
+    [Text(@"- Feature1
+- Feature2
+- Feature3")]
+
+    [Heading("Settings Section 1")]
+    [Field(Name = "Setting 1")]
+    public string Name { get; set; }
+
+    [Field(Name = "Setting 2")]
+    public int Age { get; set; }
+
+    [Heading("Setting Section 2")]
+    [Field(Name = "Setting 1")]
+    public string Blah { get; set; }
+
+    [Field(Name = "Setting 2")]
+    public int Gah { get; set; }
 
 
     [JsonIgnore]
@@ -38,8 +55,7 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets.Config
 
     public override string ToString()
     {
-      // Human-readable Plugin name
-      return "Useful Snippets";
+      return "";
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
