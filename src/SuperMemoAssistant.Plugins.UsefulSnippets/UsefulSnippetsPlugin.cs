@@ -82,6 +82,13 @@ namespace SuperMemoAssistant.Plugins.UsefulSnippets
     private void CallThisFunction()
     {
     }
+    
+    /// <inheritdoc />
+    public override void ShowSettings()
+    {
+      ConfigurationWindow.ShowAndActivate(HotKeyManager.Instance, Config);
+    }
+
 
     private void LoadConfig()
     {
